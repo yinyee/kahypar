@@ -32,12 +32,12 @@
 
 #include "gtest/gtest_prod.h"
 
-#include "kahypar/macros.h"
+#include "kahypar-resources/macros.h"
 
 #include "kahypar/datastructure/sparse_map.h"
 #include "kahypar/definitions.h"
 #include "kahypar/partition/context.h"
-#include "kahypar/utils/randomize.h"
+#include "kahypar-resources/utils/randomize.h"
 
 namespace kahypar {
 namespace ds {
@@ -60,13 +60,15 @@ class Graph {
  private:
   static constexpr bool enable_heavy_assert = false;
 
-  class NodeIDIterator : public std::iterator<
-                           std::forward_iterator_tag,  // iterator_category
-                           NodeID,  // value_type
-                           std::ptrdiff_t,  // difference_type
-                           NodeID*,  // pointer
-                           NodeID>{  // reference
+  class NodeIDIterator {
  public:
+
+    using iterator_category = std::forward_iterator_tag;
+    using value_type = NodeID;
+    using difference_type = std::ptrdiff_t;
+    using pointer = NodeID*;
+    using reference = NodeID;
+
     explicit NodeIDIterator(const NodeID start) :
       _i(start) { }
 

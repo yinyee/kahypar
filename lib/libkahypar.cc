@@ -22,10 +22,10 @@
 
 #include "kahypar/application/command_line_options.h"
 #include "kahypar/io/hypergraph_io.h"
-#include "kahypar/macros.h"
+#include "kahypar-resources/macros.h"
 #include "kahypar/partition/context.h"
 #include "kahypar/partitioner_facade.h"
-#include "kahypar/utils/randomize.h"
+#include "kahypar-resources/utils/randomize.h"
 #include "kahypar/utils/validate.h"
 
 
@@ -65,6 +65,10 @@ void kahypar_set_seed(kahypar_context_t* kahypar_context, const int seed) {
   context.partition.seed =seed;
 }
 
+void kahypar_supress_output(kahypar_context_t* kahypar_context, const bool decision) {
+  kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
+  context.partition.quiet_mode = decision;
+}
 
 void kahypar_configure_context_from_file(kahypar_context_t* kahypar_context,
                                          const char* ini_file_name) {

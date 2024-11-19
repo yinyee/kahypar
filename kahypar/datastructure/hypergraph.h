@@ -35,12 +35,12 @@
 #include "gtest/gtest_prod.h"
 
 #include "kahypar/datastructure/connectivity_sets.h"
-#include "kahypar/datastructure/fast_reset_flag_array.h"
+#include "kahypar-resources/datastructure/fast_reset_flag_array.h"
 #include "kahypar/datastructure/sparse_set.h"
-#include "kahypar/macros.h"
-#include "kahypar/meta/empty.h"
-#include "kahypar/meta/int_to_type.h"
-#include "kahypar/meta/mandatory.h"
+#include "kahypar-resources/macros.h"
+#include "kahypar-resources/meta/empty.h"
+#include "kahypar-resources/meta/int_to_type.h"
+#include "kahypar-resources/meta/mandatory.h"
 #include "kahypar/partition/context_enum_classes.h"
 #include "kahypar/utils/math.h"
 
@@ -372,15 +372,16 @@ class GenericHypergraph {
    *
    */
   template <typename ElementType>
-  class HypergraphElementIterator :
-    public std::iterator<std::forward_iterator_tag,    // iterator_category
-                         typename ElementType::IDType,   // value_type
-                         std::ptrdiff_t,   // difference_type
-                         const typename ElementType::IDType*,   // pointer
-                         typename ElementType::IDType>{   // reference
+  class HypergraphElementIterator {
     using IDType = typename ElementType::IDType;
 
  public:
+    using iterator_category = std::forward_iterator_tag;
+    using value_type = typename ElementType::IDType;
+    using difference_type = std::ptrdiff_t;
+    using pointer = const typename ElementType::IDType*;
+    using reference = typename ElementType::IDType;
+
     HypergraphElementIterator() = default;
 
     HypergraphElementIterator(const HypergraphElementIterator& other) = default;
